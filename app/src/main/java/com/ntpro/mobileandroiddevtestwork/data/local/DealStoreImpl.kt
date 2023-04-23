@@ -2,7 +2,7 @@ package com.ntpro.mobileandroiddevtestwork.data.local
 
 import com.ntpro.mobileandroiddevtestwork.Server
 import com.ntpro.mobileandroiddevtestwork.data.room.DealsDatabase
-import com.ntpro.mobileandroiddevtestwork.data.room.LocalDeal
+import com.ntpro.mobileandroiddevtestwork.data.room.entities.LocalDeal
 
 class DealStoreImpl(
     database: DealsDatabase

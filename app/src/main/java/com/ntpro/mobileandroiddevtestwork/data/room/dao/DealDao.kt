@@ -1,11 +1,11 @@
-package com.ntpro.mobileandroiddevtestwork.data.room
+package com.ntpro.mobileandroiddevtestwork.data.room.dao
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
+import com.ntpro.mobileandroiddevtestwork.data.room.entities.LocalDeal
 
 @Dao
 interface DealDao {
