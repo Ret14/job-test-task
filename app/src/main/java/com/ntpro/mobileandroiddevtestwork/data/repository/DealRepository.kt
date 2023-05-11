@@ -3,6 +3,7 @@ package com.ntpro.mobileandroiddevtestwork.data.repository
 import androidx.paging.PagingSource
 import com.ntpro.mobileandroiddevtestwork.Server
 import com.ntpro.mobileandroiddevtestwork.data.room.entities.LocalDeal
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 
 interface DealRepository {
@@ -13,4 +14,5 @@ interface DealRepository {
     suspend fun getDealsBySide(isAsc: Boolean): PagingSource<Int, LocalDeal>
     suspend fun createDeals(deals: List<Server.Deal>)
     suspend fun deleteAllDeals()
+    fun getDataChannel(): Channel<List<Server.Deal>>
 }

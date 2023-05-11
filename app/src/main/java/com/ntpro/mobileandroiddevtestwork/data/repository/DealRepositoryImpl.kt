@@ -2,9 +2,7 @@ package com.ntpro.mobileandroiddevtestwork.data.repository
 
 import com.ntpro.mobileandroiddevtestwork.Server
 import com.ntpro.mobileandroiddevtestwork.data.local.DealStore
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.channels.Channel
 
 class DealRepositoryImpl(
     private val dealStore: DealStore,
@@ -23,5 +21,8 @@ class DealRepositoryImpl(
     override suspend fun createDeals(deals: List<Server.Deal>) = dealStore.createDeals(deals)
 
     override suspend fun deleteAllDeals() = dealStore.deleteAllDeals()
+    override fun getDataChannel(): Channel<List<Server.Deal>> = dataChannel
+
+    private val dataChannel = Channel<List<Server.Deal>>()
 
 }

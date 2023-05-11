@@ -19,11 +19,14 @@ class DealStoreImpl(
     override suspend fun getDealsByAmount(isAsc: Boolean) = deals.readAllByAmount(isAsc)
     override suspend fun getDealsBySide(isAsc: Boolean) = deals.readAllBySide(isAsc)
 
-    override suspend fun createDeals(newDeals: List<Server.Deal>) = deals.create(newDeals.map { it.toLocalDeal() })
+    override suspend fun createDeals(newDeals: List<Server.Deal>) =
+        deals.create(newDeals.map { it.toLocalDeal() })
 
     override suspend fun deleteAllDeals() = deals.deleteAll()
 
     private fun Server.Deal.toLocalDeal() =
         LocalDeal(id, timeStamp, instrumentName, price, amount, side)
+
+    private fun LocalDeal.toDeal() = Server.Deal(id, timeStamp, instrumentName, price, amount, side)
 
 }

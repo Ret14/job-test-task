@@ -2,8 +2,11 @@ package com.ntpro.mobileandroiddevtestwork.di
 
 import android.content.Context
 import androidx.room.Room
+import com.ntpro.mobileandroiddevtestwork.Server
 import com.ntpro.mobileandroiddevtestwork.data.local.DealStore
 import com.ntpro.mobileandroiddevtestwork.data.local.DealStoreImpl
+import com.ntpro.mobileandroiddevtestwork.data.repository.DealRepository
+import com.ntpro.mobileandroiddevtestwork.data.repository.DealRepositoryImpl
 import com.ntpro.mobileandroiddevtestwork.data.room.DealsDatabase
 import dagger.Module
 import dagger.Provides
@@ -31,10 +34,15 @@ object AppModule {
         return DealStoreImpl(database)
     }
 
-//    @Singleton
-//    @Provides
-//    fun provideDealMediator(store: DealStore): DealRemoteMediator {
-//        return DealRemoteMediator(store)
-//    }
+    @Singleton
+    @Provides
+    fun provideDealRemote(): Server {
+        return Server()
+    }
 
+    @Singleton
+    @Provides
+    fun provideDealRepository(store: DealStore, remote: Server): DealRepository {
+        return DealRepositoryImpl(store, remote)
+    }
 }
