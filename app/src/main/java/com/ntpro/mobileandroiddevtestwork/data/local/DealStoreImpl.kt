@@ -9,15 +9,15 @@ class DealStoreImpl(
 ) : DealStore {
     private val deals = database.deals
 
-    override suspend fun getDealsByTime(isAsc: Boolean) = deals.readAllByTime(isAsc)
+    override fun getDealsByTime(isAsc: Boolean) = deals.readAllByTime(isAsc)
 
-    override suspend fun getDealsByInstrumentName(isAsc: Boolean) =
+    override fun getDealsByInstrumentName(isAsc: Boolean) =
         deals.readAllByInstrumentName(isAsc)
 
-    override suspend fun getDealsByPrice(isAsc: Boolean) = deals.readAllByPrice(isAsc)
+    override fun getDealsByPrice(isAsc: Boolean) = deals.readAllByPrice(isAsc)
 
-    override suspend fun getDealsByAmount(isAsc: Boolean) = deals.readAllByAmount(isAsc)
-    override suspend fun getDealsBySide(isAsc: Boolean) = deals.readAllBySide(isAsc)
+    override fun getDealsByAmount(isAsc: Boolean) = deals.readAllByAmount(isAsc)
+    override fun getDealsBySide(isAsc: Boolean) = deals.readAllBySide(isAsc)
 
     override suspend fun createDeals(newDeals: List<Server.Deal>) =
         deals.create(newDeals.map { it.toLocalDeal() })

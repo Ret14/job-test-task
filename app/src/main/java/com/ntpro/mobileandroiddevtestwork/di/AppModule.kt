@@ -42,7 +42,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideDealRepository(store: DealStore, remote: Server): DealRepository {
-        return DealRepositoryImpl(store, remote)
+    fun provideDealRepository(store: DealStore): DealRepository {
+        return DealRepositoryImpl(store)
     }
 }

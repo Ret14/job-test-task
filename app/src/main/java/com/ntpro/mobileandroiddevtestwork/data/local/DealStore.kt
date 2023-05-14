@@ -5,11 +5,11 @@ import com.ntpro.mobileandroiddevtestwork.Server
 import com.ntpro.mobileandroiddevtestwork.data.room.entities.LocalDeal
 
 interface DealStore {
-    suspend fun getDealsByTime(isAsc: Boolean): PagingSource<Int, LocalDeal>
-    suspend fun getDealsByInstrumentName(isAsc: Boolean): PagingSource<Int, LocalDeal>
-    suspend fun getDealsByPrice(isAsc: Boolean): PagingSource<Int, LocalDeal>
-    suspend fun getDealsByAmount(isAsc: Boolean): PagingSource<Int, LocalDeal>
-    suspend fun getDealsBySide(isAsc: Boolean): PagingSource<Int, LocalDeal>
+    fun getDealsByTime(isAsc: Boolean): PagingSource<Int, LocalDeal>
+    fun getDealsByInstrumentName(isAsc: Boolean): PagingSource<Int, LocalDeal>
+    fun getDealsByPrice(isAsc: Boolean): PagingSource<Int, LocalDeal>
+    fun getDealsByAmount(isAsc: Boolean): PagingSource<Int, LocalDeal>
+    fun getDealsBySide(isAsc: Boolean): PagingSource<Int, LocalDeal>
     suspend fun createDeals(deals: List<Server.Deal>)
     suspend fun deleteAllDeals()
 }

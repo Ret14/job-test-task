@@ -6,9 +6,11 @@ import androidx.paging.PagingData
 import com.ntpro.mobileandroiddevtestwork.Server
 import com.ntpro.mobileandroiddevtestwork.data.local.DealStore
 import com.ntpro.mobileandroiddevtestwork.data.room.entities.LocalDeal
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class DealRepositoryImpl(
@@ -21,24 +23,36 @@ class DealRepositoryImpl(
     override fun getFlowByTime(isAsc: Boolean): Flow<PagingData<LocalDeal>> {
         return Pager(
             config = PAGING_CONFIG,
-            pagingSourceFactory = {  }
+            pagingSourceFactory = { dealStore.getDealsByTime(isAsc) }
             ).flow
     }
 
     override fun getFlowByInstrumentName(isAsc: Boolean): Flow<PagingData<LocalDeal>> {
-        TODO("Not yet implemented")
+        return Pager(
+            config = PAGING_CONFIG,
+            pagingSourceFactory = { dealStore.getDealsByInstrumentName(isAsc) }
+        ).flow
     }
 
     override fun getFlowByPrice(isAsc: Boolean): Flow<PagingData<LocalDeal>> {
-        TODO("Not yet implemented")
+        return Pager(
+            config = PAGING_CONFIG,
+            pagingSourceFactory = { dealStore.getDealsByPrice(isAsc) }
+        ).flow
     }
 
     override fun getFlowByAmount(isAsc: Boolean): Flow<PagingData<LocalDeal>> {
-        TODO("Not yet implemented")
+        return Pager(
+            config = PAGING_CONFIG,
+            pagingSourceFactory = { dealStore.getDealsByAmount(isAsc) }
+        ).flow
     }
 
     override fun getFlowBySide(isAsc: Boolean): Flow<PagingData<LocalDeal>> {
-        TODO("Not yet implemented")
+        return Pager(
+            config = PAGING_CONFIG,
+            pagingSourceFactory = { dealStore.getDealsBySide(isAsc) }
+        ).flow
     }
 
     companion object {
