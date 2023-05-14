@@ -1,28 +1,48 @@
 package com.ntpro.mobileandroiddevtestwork.data.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.ntpro.mobileandroiddevtestwork.Server
 import com.ntpro.mobileandroiddevtestwork.data.local.DealStore
+import com.ntpro.mobileandroiddevtestwork.data.room.entities.LocalDeal
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlin.coroutines.CoroutineContext
 
 class DealRepositoryImpl(
     private val dealStore: DealStore,
-    val dealRemote: Server
 ): DealRepository {
-    override suspend fun getDealsByTime(isAsc: Boolean) = dealStore.getDealsByTime(isAsc)
-
-    override suspend fun getDealsByInstrumentName(isAsc: Boolean) = dealStore.getDealsByInstrumentName(isAsc)
-
-    override suspend fun getDealsByPrice(isAsc: Boolean) = dealStore.getDealsByPrice(isAsc)
-
-    override suspend fun getDealsByAmount(isAsc: Boolean) = dealStore.getDealsByAmount(isAsc)
-
-    override suspend fun getDealsBySide(isAsc: Boolean) = dealStore.getDealsBySide(isAsc)
-
     override suspend fun createDeals(deals: List<Server.Deal>) = dealStore.createDeals(deals)
 
     override suspend fun deleteAllDeals() = dealStore.deleteAllDeals()
-    override fun getDataChannel(): Channel<List<Server.Deal>> = dataChannel
 
-    private val dataChannel = Channel<List<Server.Deal>>()
+    override fun getFlowByTime(isAsc: Boolean): Flow<PagingData<LocalDeal>> {
+        return Pager(
+            config = PAGING_CONFIG,
+            pagingSourceFactory = {  }
+            ).flow
+    }
+
+    override fun getFlowByInstrumentName(isAsc: Boolean): Flow<PagingData<LocalDeal>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getFlowByPrice(isAsc: Boolean): Flow<PagingData<LocalDeal>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getFlowByAmount(isAsc: Boolean): Flow<PagingData<LocalDeal>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getFlowBySide(isAsc: Boolean): Flow<PagingData<LocalDeal>> {
+        TODO("Not yet implemented")
+    }
+
+    companion object {
+         val PAGING_CONFIG = PagingConfig(pageSize = 20, enablePlaceholders = true)
+    }
 
 }
