@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_items_spacing">8.dp</dimen>
+    <dimen name="screen_padding_start">40.dp</dimen>
+    <dimen name="screen_padding_end">40.dp</dimen>
+    <dimen name="screen_padding_top">40.dp</dimen>
+    <dimen name="deal_card_padding">20.dp</dimen>
+    <dimen name="filter_direction_button_border_width">1.dp</dimen>
+    <integer name="regular_font_size">16</integer>
+</resources>
