@@ -1,6 +1,6 @@
 package com.ntpro.mobileandroiddevtestwork.domain
 
-import com.ntpro.mobileandroiddevtestwork.Server
+import com.ntpro.mobileandroiddevtestwork.data.Server
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

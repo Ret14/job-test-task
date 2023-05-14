@@ -3,7 +3,6 @@ package com.ntpro.mobileandroiddevtestwork.presentation.deals_screen
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ntpro.mobileandroiddevtestwork.Server
 import com.ntpro.mobileandroiddevtestwork.domain.DealUseCase
 import com.ntpro.mobileandroiddevtestwork.data.repository.DealRepository
 import com.ntpro.mobileandroiddevtestwork.utils.FiltrationOn

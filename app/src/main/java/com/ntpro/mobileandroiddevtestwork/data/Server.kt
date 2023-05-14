@@ -1,4 +1,4 @@
-package com.ntpro.mobileandroiddevtestwork
+package com.ntpro.mobileandroiddevtestwork.data
 
 import android.os.Handler
 import android.os.Looper

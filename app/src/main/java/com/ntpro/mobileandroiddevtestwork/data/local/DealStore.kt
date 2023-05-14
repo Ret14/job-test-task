@@ -1,7 +1,7 @@
 package com.ntpro.mobileandroiddevtestwork.data.local
 
 import androidx.paging.PagingSource
-import com.ntpro.mobileandroiddevtestwork.Server
+import com.ntpro.mobileandroiddevtestwork.data.Server
 import com.ntpro.mobileandroiddevtestwork.data.room.entities.LocalDeal
 
 interface DealStore {

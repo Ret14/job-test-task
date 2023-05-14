@@ -46,8 +46,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.ntpro.mobileandroiddevtestwork.R
-import com.ntpro.mobileandroiddevtestwork.Server
+import com.ntpro.mobileandroiddevtestwork.data.Server
 import com.ntpro.mobileandroiddevtestwork.data.room.entities.LocalDeal
+import com.ntpro.mobileandroiddevtestwork.utils.Consts
 import com.ntpro.mobileandroiddevtestwork.utils.FiltrationOn
 import kotlin.math.roundToInt
 
@@ -55,7 +56,13 @@ import kotlin.math.roundToInt
 fun DealsScreen(viewModel: DealsScreenViewModel = hiltViewModel()) {
     val deals = viewModel.pager.collectAsLazyPagingItems()
 
-    Column {
+    Column(
+        modifier = Modifier.padding(
+            start = dimensionResource(id = R.dimen.screen_padding_start),
+            end = dimensionResource(id = R.dimen.screen_padding_end),
+            top = dimensionResource(id = R.dimen.screen_padding_top)
+        )
+    ) {
         AscDescSwitch(isAscValue = viewModel.isFilterAscending.value,
             onValueChange = {
                 viewModel.isFilterAscending.value = it
@@ -63,7 +70,7 @@ fun DealsScreen(viewModel: DealsScreenViewModel = hiltViewModel()) {
             }
         )
         DropdownTextFieldListed(
-            listOfItems = FiltrationOn.values().map { it.toString() },
+            mapOfItems = Consts.filterFieldsMap,
             label = stringResource(R.string.filter_by_label),
             value = viewModel.filtrationOn.value.toString(),
             onValueChange = {
@@ -100,22 +107,21 @@ private fun DealCard(deal: LocalDeal) {
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_items_spacing))
             ) {
-                listOf("Id:", "Time:", "Instrument:", "Price:", "Amount:", "Side:").forEach {
+                Consts.dealCardArgsTitles.forEach {
                     Text(
-                        text = it,
+                        text = stringResource(id = it),
                         style = TextStyle(
                             fontSize = integerResource(id = R.integer.regular_font_size).sp,
                             color = Color.Black,
                             fontWeight = FontWeight.Medium
-                        )
+                        ),
+                        modifier = Modifier.width(100.dp)
                     )
                 }
             }
             Column(
                 horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.spacedBy(
-                    dimensionResource(id = R.dimen.small_items_spacing)
-                )
+                verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 Text(
                     text = deal.id.toString(),
@@ -153,18 +159,18 @@ private fun AscDescSwitch(
     isAscValue: Boolean,
     onValueChange: (Boolean) -> Unit
 ) {
+    Text(
+        text = stringResource(R.string.filter_direction_title),
+        style = TextStyle(
+            fontSize = integerResource(id = R.integer.regular_font_size).sp,
+            color = Color.Black,
+            fontWeight = FontWeight.Medium
+        )
+    )
     Row(
         horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_items_spacing)),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = stringResource(R.string.filter_direction_title),
-            style = TextStyle(
-                fontSize = integerResource(id = R.integer.regular_font_size).sp,
-                color = Color.Black,
-                fontWeight = FontWeight.Medium
-            )
-        )
         Button(
             border = BorderStroke(
                 dimensionResource(id = R.dimen.filter_direction_button_border_width),
@@ -176,7 +182,7 @@ private fun AscDescSwitch(
                 contentColor = Color.Black
             ),
         ) {
-            Text(text = "By Ascending")
+            Text(text = stringResource(R.string.filter_ascending))
         }
         Button(
             border = BorderStroke(
@@ -189,7 +195,7 @@ private fun AscDescSwitch(
                 contentColor = Color.Black
             ),
         ) {
-            Text(text = "By Descending")
+            Text(text = stringResource(R.string.filter_descending))
         }
     }
 }
@@ -197,7 +203,7 @@ private fun AscDescSwitch(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun DropdownTextFieldListed(
-    listOfItems: List<String>,
+    mapOfItems: Map<String, Int>,
     label: String,
     value: String,
     onValueChange: (String) -> Unit,
@@ -228,7 +234,7 @@ private fun DropdownTextFieldListed(
             )
         )
         TextField(
-            value = value,
+            value = stringResource(id = mapOfItems[value]!!),
             onValueChange = onValueChange,
             modifier = Modifier
                 .fillMaxWidth()
@@ -258,13 +264,13 @@ private fun DropdownTextFieldListed(
             modifier = Modifier
                 .width(with(LocalDensity.current) { textFieldSize.width.toDp() })
         ) {
-            listOfItems.forEach { entry ->
+            mapOfItems.forEach { entry ->
                 DropdownMenuItem(
                     onClick = {
-                        onValueChange(entry)
+                        onValueChange(entry.key)
                         isExpanded = false
                     },
-                    text = { Text(text = entry) }
+                    text = { Text(text = stringResource(id = entry.value)) }
                 )
             }
         }

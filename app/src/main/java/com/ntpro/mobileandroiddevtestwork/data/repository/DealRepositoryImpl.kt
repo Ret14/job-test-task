@@ -3,15 +3,10 @@ package com.ntpro.mobileandroiddevtestwork.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.ntpro.mobileandroiddevtestwork.Server
+import com.ntpro.mobileandroiddevtestwork.data.Server
 import com.ntpro.mobileandroiddevtestwork.data.local.DealStore
 import com.ntpro.mobileandroiddevtestwork.data.room.entities.LocalDeal
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 class DealRepositoryImpl(
     private val dealStore: DealStore,

@@ -2,7 +2,7 @@ package com.ntpro.mobileandroiddevtestwork.data.room.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.ntpro.mobileandroiddevtestwork.Server
+import com.ntpro.mobileandroiddevtestwork.data.Server
 import java.util.*
 
 @Entity(tableName = "deal")

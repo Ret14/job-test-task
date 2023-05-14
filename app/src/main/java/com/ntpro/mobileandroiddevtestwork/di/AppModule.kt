@@ -2,7 +2,7 @@ package com.ntpro.mobileandroiddevtestwork.di
 
 import android.content.Context
 import androidx.room.Room
-import com.ntpro.mobileandroiddevtestwork.Server
+import com.ntpro.mobileandroiddevtestwork.data.Server
 import com.ntpro.mobileandroiddevtestwork.data.local.DealStore
 import com.ntpro.mobileandroiddevtestwork.data.local.DealStoreImpl
 import com.ntpro.mobileandroiddevtestwork.data.repository.DealRepository
