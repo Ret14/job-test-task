@@ -34,6 +34,8 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -62,7 +64,7 @@ fun DealsScreen(viewModel: DealsScreenViewModel = hiltViewModel()) {
         )
         DropdownTextFieldListed(
             listOfItems = FiltrationOn.values().map { it.toString() },
-            label = "Filter by:",
+            label = stringResource(R.string.filter_by_label),
             value = viewModel.filtrationOn.value.toString(),
             onValueChange = {
                 viewModel.filtrationOn.value = FiltrationOn.valueOf(it)
@@ -72,7 +74,7 @@ fun DealsScreen(viewModel: DealsScreenViewModel = hiltViewModel()) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_items_spacing)),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             items(items = deals) { deal ->
@@ -91,18 +93,18 @@ private fun DealCard(deal: LocalDeal) {
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.padding(20.dp)
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_items_spacing)),
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.deal_card_padding))
         ) {
             Column(
                 horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_items_spacing))
             ) {
                 listOf("Id:", "Time:", "Instrument:", "Price:", "Amount:", "Side:").forEach {
                     Text(
                         text = it,
                         style = TextStyle(
-                            fontSize = 16.sp,
+                            fontSize = integerResource(id = R.integer.regular_font_size).sp,
                             color = Color.Black,
                             fontWeight = FontWeight.Medium
                         )
@@ -111,30 +113,35 @@ private fun DealCard(deal: LocalDeal) {
             }
             Column(
                 horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(
+                    dimensionResource(id = R.dimen.small_items_spacing)
+                )
             ) {
                 Text(
-                    text = deal.id.toString(), fontSize = 16.sp,
+                    text = deal.id.toString(),
+                    fontSize = integerResource(id = R.integer.regular_font_size).sp,
                 )
                 Text(
-                    text = deal.timeStamp.toString(), fontSize = 16.sp,
+                    text = deal.timeStamp.toString(),
+                    fontSize = integerResource(id = R.integer.regular_font_size).sp,
                 )
                 Text(
-                    text = deal.instrumentName, fontSize = 16.sp,
+                    text = deal.instrumentName,
+                    fontSize = integerResource(id = R.integer.regular_font_size).sp,
                 )
                 Text(
                     text = ((deal.price * 100.0).roundToInt() / 100.0).toString(),
                     color = if (deal.side == Server.Deal.Side.BUY) Color.Green else Color.Red,
-                    fontSize = 16.sp,
-
-                    )
-                Text(
-                    text = deal.amount.roundToInt().toString(), fontSize = 16.sp,
+                    fontSize = integerResource(id = R.integer.regular_font_size).sp,
                 )
                 Text(
-                    text = deal.side.toString(), fontSize = 16.sp,
-
-                    )
+                    text = deal.amount.roundToInt().toString(),
+                    fontSize = integerResource(id = R.integer.regular_font_size).sp,
+                )
+                Text(
+                    text = deal.side.toString(),
+                    fontSize = integerResource(id = R.integer.regular_font_size).sp,
+                )
             }
         }
 
@@ -147,19 +154,22 @@ private fun AscDescSwitch(
     onValueChange: (Boolean) -> Unit
 ) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_items_spacing)),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "Filter direction:",
+            text = stringResource(R.string.filter_direction_title),
             style = TextStyle(
-                fontSize = 16.sp,
+                fontSize = integerResource(id = R.integer.regular_font_size).sp,
                 color = Color.Black,
                 fontWeight = FontWeight.Medium
             )
         )
         Button(
-            border = BorderStroke(1.dp, Color.Black),
+            border = BorderStroke(
+                dimensionResource(id = R.dimen.filter_direction_button_border_width),
+                Color.Black
+            ),
             onClick = { onValueChange(!isAscValue) },
             colors = ButtonDefaults.buttonColors(
                 containerColor = if (isAscValue) Color.Green else Color.Transparent,
@@ -169,7 +179,10 @@ private fun AscDescSwitch(
             Text(text = "By Ascending")
         }
         Button(
-            border = BorderStroke(1.dp, Color.Black),
+            border = BorderStroke(
+                dimensionResource(id = R.dimen.filter_direction_button_border_width),
+                Color.Black
+            ),
             onClick = { onValueChange(!isAscValue) },
             colors = ButtonDefaults.buttonColors(
                 containerColor = if (!isAscValue) Color.Green else Color.Transparent,
@@ -204,14 +217,12 @@ private fun DropdownTextFieldListed(
         Icons.Filled.KeyboardArrowDown
     }
     Column(
-        verticalArrangement = Arrangement.spacedBy(
-            8.dp
-        )
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_items_spacing))
     ) {
         Text(
             text = label,
             style = TextStyle(
-                fontSize = 16.sp,
+                fontSize = integerResource(id = R.integer.regular_font_size).sp,
                 color = Color.Black,
                 fontWeight = FontWeight.Medium
             )
@@ -237,7 +248,7 @@ private fun DropdownTextFieldListed(
                 Icon(icon, stringResource(R.string.dropdown_icon_description))
             },
             textStyle = TextStyle(
-                fontSize = 16.sp,
+                fontSize = integerResource(id = R.integer.regular_font_size).sp,
                 color = Color.Black
             )
         )
